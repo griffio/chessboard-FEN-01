@@ -8,16 +8,26 @@ A row is encoded by considering each square from left to right
 Where a piece occupies a square, it is represented by its initial character, except knights which use the character ‘n’ or ‘N’. White pieces use uppercase, black pieces use lowercase. For example, the black queen is ‘q’ and a white pawn is ‘P’
 Empty squares which are not occupied by any piece are encoded as digits. Runs of empty squares are coalesced, the digit value indicates the number of empty squares in each run.
 
-### Task
-Write a Java program that given an encoded chess position string as input, the program will print the decoded position. There should also be some proof provided that the program works correctly for some inputs. Empty squares should be shown as ‘.’ period characters. It is not required to reject the input if the chess position is illegal, however if any of the following validation rules fail then the position should not be printed, and instead a validation failure reason be given :
-
-Wrong number of rows
-
-Wrong number of squares on row
-
-Unexpected character
-
 Example data
+
+---
+
+Input 0:
+
+rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
+
+Output 0:
+
+rnbqkbnr
+pppppppp
+........
+........
+........
+........
+PPPPPPPP
+RNBQKBNR
+
+---
 
 Input 1:
 
@@ -34,6 +44,8 @@ n....n..
 P.P.K...
 q.....b.
 
+---
+
 Input 2:
 
 3w4/7p/7p/7p/8/8/8/8
@@ -41,3 +53,15 @@ Input 2:
 Output 2:
 
 Invalid encoded position : Unexpected character
+
+---
+
+Input 4:
+
+rnbqkbnr/pppppppp/7/8/8/8/PPPPPPPP/RNBQKBNR
+
+Output 4:
+
+Wrong number of squares on row. [7] found. 8 expected.
+
+---
