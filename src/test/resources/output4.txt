@@ -1,0 +1,1 @@
+Wrong number of squares on row. [7] found. 8 expected.
