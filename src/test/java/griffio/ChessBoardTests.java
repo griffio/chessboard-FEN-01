@@ -8,7 +8,7 @@ import java.util.Scanner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class ChessBoardTest {
+public class ChessBoardTests {
 
   static String fixture(String resource) throws IOException {
     return Resources.toString(Resources.getResource(resource), StandardCharsets.UTF_8);
@@ -17,17 +17,16 @@ public class ChessBoardTest {
   @DataProvider(name = "fixtures")
   static Object[][] fixtures() {
     return new Object[][] {
-        {"input0.txt", "output0.txt" },
-        {"input1.txt", "output1.txt" },
-        {"input2.txt", "output2.txt" },
-        {"input3.txt", "output3.txt" },
-        {"input4.txt", "output4.txt" },
-        {"input5.txt", "output5.txt" }
+        {"input0.txt", "output0.txt"},
+        {"input1.txt", "output1.txt"},
+        {"input2.txt", "output2.txt"},
+        {"input3.txt", "output3.txt"},
+        {"input4.txt", "output4.txt"},
+        {"input5.txt", "output5.txt"}
     };
   }
 
-  @Test
-  public void must_split_row_on_delimiter() throws Exception {
+  @Test(groups = "slash-delimiter") void splits_rows() throws Exception {
 
     String fixture = fixture("input1.txt");
 
@@ -47,8 +46,7 @@ public class ChessBoardTest {
     }
   }
 
-  @Test
-  public void must_match_characters() throws Exception {
+  @Test(groups = "slash-delimiter") void characters_match_first_row() throws Exception {
 
     String fixture = fixture("input1.txt");
 
@@ -65,9 +63,14 @@ public class ChessBoardTest {
     Truth.assertThat(scanner.next()).isEqualTo("r");
   }
 
-  @Test
-  public void must_repeat_n_dots() throws IOException {
+  @Test(groups = "intToDots")
+  public void repeats_3_dots() throws IOException {
     Truth.assertThat("...").isEqualTo(ChessBoard.intToDots(3));
+  }
+
+  @Test(groups = "intToDots")
+  public void repeats_8_dots() throws IOException {
+    Truth.assertThat("........").isEqualTo(ChessBoard.intToDots(8));
   }
 
   @Test
@@ -87,8 +90,8 @@ public class ChessBoardTest {
     Truth.assertThat(ChessBoard.valid.matcher("x").matches()).isFalse();
   }
 
-  @Test
-  public void must_replace_int_with_dots() throws IOException {
+  @Test(groups = "slash-delimiter")
+  public void replace_int_with_dots() throws IOException {
 
     String fixture = fixture("input1.txt");
 
@@ -108,8 +111,8 @@ public class ChessBoardTest {
     }
   }
 
-  @Test
-  public void must_create_output_row() throws IOException {
+  @Test(groups = "slash-delimiter")
+  public void create_output_row() throws IOException {
 
     String fixture = fixture("input1.txt");
 
@@ -140,7 +143,8 @@ public class ChessBoardTest {
   }
 
   @Test(dataProvider = "fixtures")
-  public void chessboard_must_produce_expected_output(String input, String output) throws IOException {
+  public void chessboard_produces_expected_output(String input, String output)
+      throws IOException {
 
     String fixture = fixture(input);
 
